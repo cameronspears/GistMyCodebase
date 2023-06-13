@@ -23,8 +23,8 @@ def get_files_in_directory(directory):
         dirnames[:] = [d for d in dirnames if not d[0] == '.']
         
         for filename in filenames:
-            # Skip files starting with . and files not ending with .py
-            if filename.startswith('.') or not filename.endswith('.py'):
+            # Skip self and files starting with . and files not ending with .py
+            if filename.startswith('gistmc') or filename.startswith('.') or not filename.endswith('.py'):
                 continue
 
             path = os.path.join(root, filename)
