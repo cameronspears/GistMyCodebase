@@ -1,8 +1,8 @@
-## Codebase Gist Uploader
+## GistMyCodebase
 
 This script automates the process of creating a private gist on GitHub that contains the codebase from the directory where the script is executed. It provides an easy and convenient way to privately share your codebases with language models like ChatGPT or other large language models (LLMs).
 
-### Why Use Codebase Gist Uploader?
+### Why Use GistMyCodebase?
 
 - **Effortless Sharing**: Share your codebases with LLMs in a private and secure manner.
 - **Condensed Code Copy**: Easily copy and paste the entire codebase within a single message or input prompt.
