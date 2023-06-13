@@ -1,8 +1,8 @@
-## GistMyCodebase
+## code2gist
 
 This script automates the process of creating a private gist on GitHub that contains the codebase from the directory where the script is executed. It provides an easy and convenient way to privately share your codebases with language models like ChatGPT or other large language models (LLMs).
 
-### Why Use GistMyCodebase?
+### Why Use codetogist?
 
 - **Effortless Sharing**: Share your codebases with LLMs in a private and secure manner.
 - **Condensed Code Copy**: Easily copy and paste the entire codebase within a single message or input prompt.
@@ -14,7 +14,7 @@ This script automates the process of creating a private gist on GitHub that cont
 2. Clone or download this repository to your local machine.
 3. Open a terminal and navigate to the project directory.
 4. Install the required dependencies: `pip install requests`.
-5. Run the script: `python gistupload.py`.
+5. Run the script: `python main.py`.
 6. The script will create a private gist with the codebase and display the URL of the gist in the terminal.
 
 ### Customization
