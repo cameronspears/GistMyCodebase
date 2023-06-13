@@ -5,7 +5,7 @@ import os
 def create_gist(description, files):
     url = "https://api.github.com/gists"
     headers = {
-        "Authorization": "token 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",
+        "Authorization": "token YOUR_GITHUB_PERSONAL_ACCESS_TOKEN",
         "Accept": "application/vnd.github.v3+json",
     }
     data = {
