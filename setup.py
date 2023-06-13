@@ -6,7 +6,7 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'code2gist=core:main',  # this means that 'code2gist' command will run the 'main' function in your package
+            'code2gist=code2gist.main:main',
         ],
     },
 )
