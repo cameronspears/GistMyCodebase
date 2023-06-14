@@ -13,7 +13,6 @@ In addition, `code2gist` comes with a `prune` feature that provides a clean way 
 You can install the package via pip:
 
 ```
-bashCopy code
 pip install code2gist
 ```
 
@@ -24,7 +23,6 @@ pip install code2gist
 To use `code2gist`, simply use the following command:
 
 ```
-bashCopy code
 code2gist .
 ```
 
@@ -33,7 +31,6 @@ This command will upload all Python files in the current directory to a private 
 If you want to include files with different extensions, you can specify them using the `--ext` option:
 
 ```
-bashCopy code
 code2gist . --ext .txt .md .py
 ```
 
@@ -44,7 +41,6 @@ This command will include all text, Markdown, and Python files in the upload.
 The `prune` feature allows you to delete all gists created by `code2gist`:
 
 ```
-bashCopy code
 code2gist --prune
 ```
 
