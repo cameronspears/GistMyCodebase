@@ -21,6 +21,9 @@ def create_gist(description, files):
         "files": files
     }
     response = requests.post(url, headers=headers, data=json.dumps(data))
+    if response.status_code != 201:
+        print(f"Failed to create a gist: {response.text}")
+        return None
     return response.json()
 
 def get_files_in_directory(directory, extensions):
@@ -47,8 +50,9 @@ def get_files_in_directory(directory, extensions):
             try:
                 with open(path, 'rt') as file:
                     files[rel_path] = {"content": file.read()}
-            except UnicodeDecodeError:
-                print(f"Could not read file: {path}")
+            except (UnicodeDecodeError, IOError) as e:
+                print(f"Error reading file: {path}. Error: {str(e)}")
+                continue
     return files
 
 def delete_old_gists():
@@ -61,15 +65,18 @@ def delete_old_gists():
         "Accept": "application/vnd.github.v3+json",
     }
     response = requests.get(url, headers=headers)
+    if response.status_code != 200:
+        print(f"Failed to fetch gists: {response.text}")
+        return
     gists = response.json()
     for gist in gists:
         if '[code2gist]' in gist['description']:
             delete_url = f"https://api.github.com/gists/{gist['id']}"
             delete_response = requests.delete(delete_url, headers=headers)
-            if delete_response.status_code == 204:
-                print(f"Deleted Gist: {gist['id']}")
-            else:
-                print(f"Failed to delete Gist: {gist['id']}")
+            if delete_response.status_code != 204:
+                print(f"Failed to delete Gist: {gist['id']}, response: {delete_response.text}")
+                continue
+            print(f"Deleted Gist: {gist['id']}")
 
 def main():
     parser = argparse.ArgumentParser(description='Upload Python files in a directory to Gist.')
@@ -83,9 +90,10 @@ def main():
         description = os.path.basename(os.getcwd()) + " [code2gist]"
         files = get_files_in_directory(directory, args.ext)
         response = create_gist(description, files)
-        for filename, file_info in response['files'].items():
-            print(f"\n- File: {filename}")
-            print(f" URL: {file_info['raw_url']}")
+        if response:
+            for filename, file_info in response['files'].items():
+                print(f"\n- File: {filename}")
+                print(f" URL: {file_info['raw_url']}")
         
     if args.prune:
         delete_old_gists()
