@@ -94,7 +94,7 @@ def main():
             for filename, file_info in response['files'].items():
                 print(f"\n- File: {filename}")
                 print(f" URL: {file_info['raw_url']}")
-        
+                print()
     if args.prune:
         delete_old_gists()
 
