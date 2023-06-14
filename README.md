@@ -13,44 +13,25 @@ In addition, `code2gist` comes with a `prune` feature that provides a clean way 
 You can install the package via pip:
 
 ```
-bashCopy code
 pip install code2gist
 ```
 
-## Usage
+### Adding code2gist Directory to the PATH Environment Variable
 
-### Uploading Files
+Here are step-by-step instructions to add the code2gist directory to your PATH environment variable on Windows:
 
-To use `code2gist`, simply use the following command:
+1. Open the **Control Panel**.
+2. Navigate to **System and Security > System**.
+3. Click on the **Advanced system settings** link on the left panel.
+4. Click **Environment Variables**.
+5. Under the **System Variables** section, find and double-click the variable **PATH**.
+6. Click **New**.
+7. Add the directory where code2gist is installed. For example, if you have Python 3.11 installed, the directory might look like this: `C:\...\Python311\Scripts`
+8. Click **OK** to close all windows and save the changes.
 
-```
-bashCopy code
-code2gist .
-```
+After following these steps, your system should recognize code2gist commands from any directory in the command line.
 
-This command will upload all Python files in the current directory to a private Gist on your GitHub account. The Gist will be titled with the name of the current directory, followed by "[code2gist]".
-
-If you want to include files with different extensions, you can specify them using the `--ext` option:
-
-```
-bashCopy code
-code2gist . --ext .txt .md .py
-```
-
-This command will include all text, Markdown, and Python files in the upload.
-
-### Deleting Gists
-
-The `prune` feature allows you to delete all gists created by `code2gist`:
-
-```
-bashCopy code
-code2gist --prune
-```
-
-Running this command will delete all your gists with "[code2gist]" in the description.
-
-## GitHub Token
+### GitHub Token
 
 `code2gist` requires a GitHub token to function. You need to create a new token with the `gist` scope (which allows it to create gists). Follow [this guide](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) to create a new token.
 
@@ -65,6 +46,36 @@ Once you have your token, you should store it in the "GITHUB_TOKEN" environment 
 7. Click "OK" on all open windows to apply the changes.
 
 Please ensure that you have this variable set before using the package.
+
+## Usage
+
+### Uploading Files
+
+To use `code2gist`, simply use the following command:
+
+```
+code2gist .
+```
+
+This command will upload all Python files in the current directory to a private Gist on your GitHub account. The Gist will be titled with the name of the current directory, followed by "[code2gist]".
+
+If you want to include files with different extensions, you can specify them using the `--ext` option:
+
+```
+code2gist . --ext .txt .md .py
+```
+
+This command will include all text, Markdown, and Python files in the upload.
+
+### Deleting Gists
+
+The `prune` feature allows you to delete all gists created by `code2gist`:
+
+```
+code2gist --prune
+```
+
+Running this command will delete all your gists with "[code2gist]" in the description.
 
 ## .gitignore Support
 
