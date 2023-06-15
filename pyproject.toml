@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "code2gist"
 version = "1.1.2"
 authors = [
-    {name = "Cameron Spears", email = "crspears@outlook.com"},
+    {name = "Cameron Spears", email = "flames.garish-0i@icloud.com"},
 ]
 description = "Upload Python files in a directory to a GitHub Gist."
 readme = "README.md"
