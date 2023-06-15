@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "code2gist"
+version = "1.1.2"
+authors = [
+    {name = "Cameron Spears", email = "crspears@outlook.com"},
+]
+description = "Upload Python files in a directory to a GitHub Gist."
+readme = "README.md"
+requires-python = ">=3.11.4"
+keywords = ["python", "github", "gist", "upload"]
+license = {text = "GPL-3.0"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "requests>=2.28.2",
+    "pathspec>=0.11.1",
+]
+
+[project.scripts]
+code2gist = "code2gist.main:main"
