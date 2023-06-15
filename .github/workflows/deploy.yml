@@ -21,6 +21,10 @@ jobs:
         pip install build
         pip install twine
         pip install bump2version
+    - name: Set up Git user
+      run: |
+        git config --global user.email "crspears@outlook.com"
+        git config --global user.name "Cameron Spears"
     - name: Bump version
       run: bump2version patch
     - name: Build package
