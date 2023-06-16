@@ -10,7 +10,17 @@ In addition, `code2gist` comes with a `prune` feature that provides a clean way 
 
 ## Installation ⚙️
 
-You can install the package via pip:
+The recommended way to install `code2gist` is via `pipx`:
+
+```
+pipx install code2gist
+```
+
+`pipx` ensures the package and its dependencies are isolated from your global Python environment. Moreover, `pipx` automatically adds the installed package to your PATH, so you can run `code2gist` from any directory in the command line. 🧠
+
+If you haven't installed `pipx` yet, you can do it by running `python3 -m pip install --user pipx` and then `python3 -m pipx ensurepath`.
+
+You can still install the package via pip, but you will have to add the package directory to your PATH manually 😒:
 
 ```
 pip install code2gist
