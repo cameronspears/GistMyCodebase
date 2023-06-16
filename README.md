@@ -2,7 +2,7 @@
 
 `code2gist` is a Python package that makes sharing your code projects easier than ever. With a simple command, it lets you upload your code files to GitHub's Gist. `code2gist` is available on [PyPI](https://pypi.org/project/code2gist/).
 
-The package works hand-in-hand with OpenAI's ChatGPT-4's 'Browse with Bing' feature. This compatibility allows you to present substantial code bases to the model in a single instance, eliminating the need to split your code into smaller parts. 🗜️
+The package works hand-in-hand with OpenAI's ChatGPT-4's 'Browse with Bing' feature. Send codebases without going over the character limit using a secret URL. 🗜️
 
 Another key feature of `code2gist` is its ability to handle a wide range of text-based file types, not just Python files. 📄
 
