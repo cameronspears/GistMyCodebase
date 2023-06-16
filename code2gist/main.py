@@ -19,29 +19,62 @@ def create_gist(description, files):
     data = {"public": False, "description": description, "files": files}
     response = requests.post(url, headers=headers, data=json.dumps(data))
     if response.status_code != 201:
-        print(f"❌ Failed to create a gist: {response.text}")
+        error_message = response.text
+        # Parse the error message JSON
+        try:
+            error_json = json.loads(error_message)
+            if "errors" in error_json:
+                for error in error_json["errors"]:
+                    if (
+                        "code" in error
+                        and error["code"] == "missing_field"
+                        and "field" in error
+                        and error["field"] == "files"
+                    ):
+                        # A more friendly error message
+                        error_message = "No files found to create a gist. Check your .code2gistignore file or use the --ext option to specify file extensions to include."
+        except json.JSONDecodeError:
+            pass  # If the error message is not valid JSON, leave it as is
+        print(f"❌ Failed to create a gist: {error_message}")
         return None
     return response.json()
 
 
+def _load_ignore_file(directory, filename):
+    file_path = os.path.join(directory, filename)
+    ignore_spec = None
+    if os.path.exists(file_path):
+        with open(file_path, "r") as f:
+            ignore_spec = pathspec.PathSpec.from_lines("gitwildmatch", f)
+    else:
+        if filename == ".code2gistignore":
+            with open(file_path, "w") as f:
+                pass  # create an empty .code2gistignore file
+    return ignore_spec
+
+
+def _valid_file(filename, rel_path, extensions, gitignore, code2gistignore):
+    if not any(filename.endswith(ext) for ext in extensions):
+        return False
+    if gitignore and gitignore.match_file(rel_path):
+        return False
+    if code2gistignore and code2gistignore.match_file(rel_path):
+        return False
+    return True
+
+
 def get_files_in_directory(directory, extensions):
-    # Load the .gitignore file, if it exists.
-    gitignore_path = os.path.join(directory, ".gitignore")
-    gitignore = None
-    if os.path.exists(gitignore_path):
-        with open(gitignore_path, "r") as f:
-            gitignore = pathspec.PathSpec.from_lines("gitwildmatch", f)
+    gitignore = _load_ignore_file(directory, ".gitignore")
+    code2gistignore = _load_ignore_file(directory, ".code2gistignore")
 
     files = {}
-    for root, dirnames, filenames in os.walk(directory):
+    for root, _, filenames in os.walk(directory):
         for filename in filenames:
-            if not any(filename.endswith(ext) for ext in extensions):
-                continue
             path = os.path.join(root, filename)
             rel_path = os.path.relpath(path, directory)
-
-            # Skip the file if it matches a .gitignore rule.
-            if gitignore and gitignore.match_file(rel_path):
+            if not _valid_file(
+                filename, rel_path, extensions, gitignore, code2gistignore
+            ):
                 continue
 
             try:
@@ -49,7 +82,6 @@ def get_files_in_directory(directory, extensions):
                     files[rel_path] = {"content": file.read()}
             except (UnicodeDecodeError, IOError) as e:
                 print(f"❌ Error reading file: {path}. Error: {str(e)}")
-                continue
     return files
 
 

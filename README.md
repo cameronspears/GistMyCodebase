@@ -77,9 +77,9 @@ code2gist --prune
 
 Running this command will delete all your gists with "[code2gist]" in the description.
 
-## .gitignore Support ✅
+## .gitignore and .code2gistignore Support ✅
 
-`code2gist` respects `.gitignore` rules. Files that match a rule in the `.gitignore` file of the directory being uploaded will be skipped. In addition, by default, `code2gist` skips files and directories that start with a dot (`.`), although this behavior may change in future versions to strictly adhere to `.gitignore`.
+`code2gist` respects `.gitignore` and `.code2gistignore` rules. Files that match a rule in the `.gitignore` or `.code2gistignore` file of the directory being uploaded will be skipped. 🦘
 
 ## Note 📝
 
