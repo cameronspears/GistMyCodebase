@@ -28,6 +28,11 @@ jobs:
         git config --global user.name "Cameron Spears"
     - name: Bump version
       run: bump2version patch
+    - name: Commit changes
+      run: |
+        git add -A
+        git commit -m "Bump version"
+        git push    
     - name: Build package
       run: python -m build
     - name: Upload distribution to PyPI
