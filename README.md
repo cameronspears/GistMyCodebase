@@ -89,7 +89,7 @@ Running this command will delete all your gists with "[code2gist]" in the descri
 
 ## .gitignore and .code2gistignore Support ✅
 
-`code2gist` respects `.gitignore` and `.code2gistignore` rules. Files that match a rule in the `.gitignore` or `.code2gistignore` file of the directory being uploaded will be skipped. 🦘
+`code2gist` respects `.gitignore` and `.code2gistignore` rules. Files that match a rule in either file will be skipped. 🦘
 
 ## Note 📝
 
