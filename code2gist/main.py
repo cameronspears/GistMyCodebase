@@ -115,25 +115,20 @@ def delete_old_gists():
                 continue
             deleted_gists.append(gist["id"])
 
-    print("\n" + "=" * 100)
-    print("🌳  Pruned Gists 🌳".center(100))
-    print()
 
-    wrapper = textwrap.TextWrapper(width=99, subsequent_indent=" " * 12)
-
+    print("\n🌳  Pruned Gists 🌳")
+    print("--------------------")
     if deleted_gists:
         for gist in deleted_gists:
-            print("\n".join(wrapper.wrap(f"{' '*5}✔️   {gist}")))
+            print(f"✔️   {gist}")
         print()
 
     if failed_gists:
-        print("-" * 100)
-        print("❌ Failed Gists ❌".center(100))
+        print("❌ Failed Gists ❌")
+        print("------------------")
         for gist in failed_gists:
-            print("\n".join(wrapper.wrap(f"{' '*5}✖️   {gist}")))
+            print(f"✖️   {gist}")
         print()
-
-    print("=" * 100 + "\n")
 
 
 def main():
@@ -162,19 +157,15 @@ def main():
         response = create_gist(description, files)
 
     if response:
-        wrapper = textwrap.TextWrapper(width=99, subsequent_indent=" " * 12)
-
-    print("\n" + "=" * 100)
-    print("📂  Gist URL 📂".center(100))
-    print()
-    print("\n".join(wrapper.wrap(f"{'🌐 URL:'.ljust(10)} {response['html_url']}")))
-    print()
-    print("-" * 100)
-    print("📄  File URLs 📄".center(100))
-    for filename, file_info in response["files"].items():
-        print(f"\n{'📁 File:'.ljust(10)} {filename}")
-        print(f"{'🌐 URL:'.ljust(10)} {file_info['raw_url']}")
-    print("=" * 100 + "\n")
+        print("\n📂  Gist URL 📂")
+        print("---------------")
+        print(f"🌐 URL: {response['html_url']}")
+        print("\n📄  File URLs 📄")
+        print("----------------")
+        for filename, file_info in response["files"].items():
+            print(f"📁 File: {filename}")
+            print(f"🌐 URL: {file_info['raw_url']}")
+            print()
 
     if args.prune:
         delete_old_gists()
