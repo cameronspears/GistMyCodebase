@@ -40,14 +40,13 @@ jobs:
         POETRY_HTTP_BASIC_PYPI_PASSWORD: ${{ secrets.POETRY_HTTP_BASIC_PYPI_PASSWORD }}
       run: poetry publish
     - name: Get the version
-      id: get_version
-      run: echo "::set-output name=version::$(poetry version --short)"
+      run: echo "VERSION=$(poetry version --short)" >> $GITHUB_ENV
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
       with:
-        tag_name: ${{ steps.get_version.outputs.version }}
-        release_name: v${{ steps.get_version.outputs.version }}
-        body: Auto-generated release from the GitHub Actions Workflow
+        tag_name: ${{ env.VERSION }}
+        release_name: v${{ env.VERSION }}
+        body: ${{ github.event.head_commit.message }} # Use the commit message as the release body
