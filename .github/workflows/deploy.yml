@@ -27,6 +27,8 @@ jobs:
       run: poetry install
     - name: Bump version
       run: poetry version patch
+    - name: Get the version
+      run: echo "VERSION=$(poetry version --short)" >> $GITHUB_ENV
     - name: Commit changes
       run: |
         git add -A
@@ -39,8 +41,6 @@ jobs:
         POETRY_HTTP_BASIC_PYPI_USERNAME: ${{ secrets.POETRY_HTTP_BASIC_PYPI_USERNAME }}
         POETRY_HTTP_BASIC_PYPI_PASSWORD: ${{ secrets.POETRY_HTTP_BASIC_PYPI_PASSWORD }}
       run: poetry publish
-    - name: Get the version
-      run: echo "VERSION=$(poetry version --short)" >> $GITHUB_ENV
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
