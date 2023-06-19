@@ -164,19 +164,17 @@ def main():
     if response:
         wrapper = textwrap.TextWrapper(width=99, subsequent_indent=" " * 12)
 
-        print("\n" + "=" * 100)
-        print("📂  Gist URL 📂".center(100))
-        print()
-        print("\n".join(wrapper.wrap(f"{'🌐 URL:'.ljust(10)} {response['html_url']}")))
-        print()
-        print("-" * 100)
-        print("📄  File URLs 📄".center(100))
-        for filename, file_info in response["files"].items():
-            print(f"\n{'📁 File:'.ljust(10)} {filename}")
-            url_parts = file_info["raw_url"].split("/raw", 1)
-            print(f"{'🌐 URL:'.ljust(10)} {url_parts[0]}")
-            print(" " * 12 + "/raw" + url_parts[1])
-        print("=" * 100 + "\n")
+    print("\n" + "=" * 100)
+    print("📂  Gist URL 📂".center(100))
+    print()
+    print("\n".join(wrapper.wrap(f"{'🌐 URL:'.ljust(10)} {response['html_url']}")))
+    print()
+    print("-" * 100)
+    print("📄  File URLs 📄".center(100))
+    for filename, file_info in response["files"].items():
+        print(f"\n{'📁 File:'.ljust(10)} {filename}")
+        print(f"{'🌐 URL:'.ljust(10)} {file_info['raw_url']}")
+    print("=" * 100 + "\n")
 
     if args.prune:
         delete_old_gists()
