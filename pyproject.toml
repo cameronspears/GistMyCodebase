@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "code2gist"
-version = "0.0.14"
+version = "0.0.15"
 description = "code2gist is a Python package that makes sharing your code easier than ever. Send code to ChatGPT-4's browser without going over the character limit."
 authors = ["Cameron Spears <flames.garish-0i@icloud.com>"]
 license = "GPL-3.0"
