@@ -41,12 +41,11 @@ jobs:
         POETRY_HTTP_BASIC_PYPI_USERNAME: ${{ secrets.POETRY_HTTP_BASIC_PYPI_USERNAME }}
         POETRY_HTTP_BASIC_PYPI_PASSWORD: ${{ secrets.POETRY_HTTP_BASIC_PYPI_PASSWORD }}
       run: poetry publish
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+    - name: GH Release
+      uses: softprops/action-gh-release@v1
       with:
         tag_name: ${{ env.VERSION }}
-        release_name: Release v${{ env.VERSION }}
-        body: Version update to v${{ env.VERSION }}
+        name: v${{ env.VERSION }}
+        body: v${{ env.VERSION }} - ${{ github.event.head_commit.message }} # Use the commit message as the release body
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
