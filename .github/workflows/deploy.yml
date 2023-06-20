@@ -19,10 +19,6 @@ jobs:
       run: |
         curl -sSL https://install.python-poetry.org | python -
         echo "$HOME/.poetry/bin" >> $GITHUB_PATH
-    - name: Set up Git user
-      run: |
-        git config --global user.email "crspears@outlook.com"
-        git config --global user.name "Cameron Spears"
     - name: Install dependencies
       run: poetry install
     - name: Bump version
@@ -32,8 +28,8 @@ jobs:
     - name: Commit changes
       run: |
         git add -A
-        git commit -m "v${{ env.VERSION }} - ${{ github.event.head_commit.message }}"
-        git push https://cameronspears:${{ secrets.GH_PAT }}@github.com/cameronspears/code2gist.git
+        git commit -m "Bump version to v${{ env.VERSION }}"
+        git push
     - name: Build package
       run: poetry build
     - name: Upload distribution to PyPI
@@ -48,5 +44,5 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
       with:
         tag_name: ${{ env.VERSION }}
-        release_name: v${{ env.VERSION }}
-        body: v${{ env.VERSION }} - ${{ github.event.head_commit.message }} # Use the commit message as the release body
+        release_name: Release v${{ env.VERSION }}
+        body: Version update to v${{ env.VERSION }}
